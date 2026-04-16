@@ -1,7 +1,7 @@
 "use server";
 
 import { HeaderImage } from "../../components/HeaderImage/HeaderImage";
-import { Footer } from "../../components/Footer//Footer";
+import { Footer } from "../../components/Footer/Footer";
 import React from "react";
 
 type DefaultLayoutProps = {
