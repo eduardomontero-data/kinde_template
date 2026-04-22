@@ -2,7 +2,6 @@
 
 import {
   getKindeCSRF,
-  getKindeNonce,
   getKindeRequiredCSS,
   getKindeRequiredJS,
   getSVGFaviconUrl,

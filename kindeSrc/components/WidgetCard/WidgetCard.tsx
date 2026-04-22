@@ -1,68 +1,50 @@
 "use server";
 
-import { getKindeWidget, getLogoUrl } from "@kinde/infrastructure";
+import {
+  getKindeRegisterUrl,
+  getKindeSignInUrl,
+  getKindeWidget,
+} from "@kinde/infrastructure";
 import React from "react";
+import { DolphBrand } from "../DolphBrand/DolphBrand";
+
+export type AuthFlow = "login" | "register";
 
 type WidgetCardProps = {
-  description: string;
+  /** Título de la página (p. ej. «Sign in») — suele venir del contenido de Kinde. */
   heading: string;
+  flow: AuthFlow;
 };
 
-const styles: {
-  widgetCard: React.CSSProperties;
-  heading: React.CSSProperties;
-  description: React.CSSProperties;
-  logo: React.CSSProperties;
-  logoWrapper: React.CSSProperties;
-} = {
-  widgetCard: {
-    maxWidth: "400px",
-    width: "100%",
-    margin: "0 auto",
-    padding: "1rem",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-  heading: {
-    alignSelf: "stretch",
-    color: "var(--Basic-White, #FFF)",
-    fontSize: "32px",
-    fontStyle: "normal",
-    fontWeight: 650,
-    lineHeight: "32px" /* 100% */,
-    letterSpacing: "-0.64px",
-    fontFamily: "SF Pro Expanded Semibold",
-  },
-  description: {
-    marginBottom: "1.5rem",
-  },
-  logoWrapper: {
-    display: "flex",
-    justifyContent: "center",
-    marginBottom: "3rem",
-  },
-  logo: {
-    width: "115.5px",
-  },
-};
+export const WidgetCard: React.FC<WidgetCardProps> = ({ heading, flow }) => {
+  const isLogin = flow === "login";
 
-export const WidgetCard: React.FC<WidgetCardProps> = ({
-  description,
-  heading,
-}) => {
   return (
-    <article style={styles.widgetCard}>
-      <header>
-        <div style={styles.logoWrapper}>
-          <img style={styles.logo} src={getLogoUrl()} />
-        </div>
-        <div>
-          <h1 style={styles.heading}>{heading}</h1>
-          <p style={styles.description}>{description}</p>
-        </div>
+    <article className="auth-card">
+      <header className="auth-card__header">
+        <DolphBrand />
+        <h1 className="auth-card__title">{heading}</h1>
       </header>
-      {getKindeWidget()}
+
+      <div className="auth-widget-host">{getKindeWidget()}</div>
+
+      <footer className="auth-card__footer">
+        {isLogin ? (
+          <p className="auth-card__footer-text">
+            No account?{" "}
+            <a className="auth-card__link" href={getKindeRegisterUrl()}>
+              Create one
+            </a>
+          </p>
+        ) : (
+          <p className="auth-card__footer-text">
+            Already have an account?{" "}
+            <a className="auth-card__link" href={getKindeSignInUrl()}>
+              Sign in
+            </a>
+          </p>
+        )}
+      </footer>
     </article>
   );
 };
