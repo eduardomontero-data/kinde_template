@@ -2,7 +2,7 @@
 
 import { type KindePageEvent } from "@kinde/infrastructure";
 import React from "react";
-import { renderToString } from "react-dom/server";
+import { renderToString } from "react-dom/server.browser";
 import { WidgetCard } from "../../../../components/WidgetCard/WidgetCard";
 import { DefaultLayout } from "../../../../layouts/Default/Default";
 import { Root } from "../../../../root";

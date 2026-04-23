@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { createRoot } from "react-dom/client";
-import { renderToString } from "react-dom/server";
+import { renderToString } from "react-dom/server.browser";
 import { Root } from "../kindeSrc/root";
 import { DefaultLayout } from "../kindeSrc/layouts/Default/Default";
 import { WidgetCard } from "../kindeSrc/components/WidgetCard/WidgetCard";
